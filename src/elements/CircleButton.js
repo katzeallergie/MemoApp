@@ -10,6 +10,7 @@ const glyphMap = { 'icon-name': 1234, test: '∆' };
 const CustomIcon = createIconSet({
   pencil : "\uf303",
   plus   : "\uf067",
+  check  : "\uf00c",
 }, 'FontAwesome');
 
 
