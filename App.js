@@ -9,8 +9,14 @@ import MemoDetailScreen from "./src/screens/MemoDetailScreen";
 import MemoEditScreen from "./src/screens/MemoEditScreen";
 import LoginScreen from "./src/screens/LoginScreen";
 import SignupScreen from "./src/screens/SignupScreen";
+import MemoCreateScreen from "./src/screens/MemoCreateScreen";
+
 
 import ENV from "./env.json";
+
+require("firebase/firestore");
+
+
 
 const firebaseConfig = {
   apiKey: ENV.FIREBASE_API_KEY,
@@ -23,6 +29,7 @@ const firebaseConfig = {
   measurementId: ENV.FIREBASE_MEASUREMENT_ID,
 };
 firebase.initializeApp(firebaseConfig);
+var db = firebase.firestore();
 
 const App = createStackNavigator({
   Login:      { screen : LoginScreen},
@@ -30,6 +37,8 @@ const App = createStackNavigator({
   Home:       { screen : MemoListScreen },
   MemoDetail: { screen : MemoDetailScreen },
   MemoEdit:   { screen : MemoEditScreen},
+  MemoCreate: { screen : MemoCreateScreen},
+  
 }, {
   defaultNavigationOptions: {
     title: "Memo",
