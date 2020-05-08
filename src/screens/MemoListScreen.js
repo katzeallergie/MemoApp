@@ -23,17 +23,6 @@ class MemoListScreen extends React.Component {
       });
       this.setState({memoList: memoList});
     });
-    /*get()
-    .then((querySnapshot) => {
-      const memoList = [];
-      querySnapshot.forEach((doc) => {
-        memoList.push({ ...doc.data(), key: doc.id });
-      });
-      this.setState({memoList: memoList});
-    })
-    .catch((error) => {
-      console.log(error);
-    });*/
   }
 
   handlePress() {

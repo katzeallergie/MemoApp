@@ -14,8 +14,6 @@ class MemoEditScreen extends React.Component {
 
   componentDidMount() {
     const { params } = this.props.navigation.state;
-    console.log(params);
-    console.log(params.body);
     this.setState({
       body: params.body,
       key: params.key,
@@ -41,8 +39,7 @@ class MemoEditScreen extends React.Component {
       });
       {this.props.navigation.goBack();}
     })
-    .catch((error) => {
-      console.log(error);
+    .catch(() => {
     })
   }
   //const newDate = firebase.firestore.Timestamp.now();
