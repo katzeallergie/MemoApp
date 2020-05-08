@@ -22,6 +22,10 @@ class MemoDetailScreen extends React.Component {
     return dateObject.toISOString().split("T")[0];
   }
 
+  returnMemo(memo) {
+    this.setState( { memo });
+  }
+
   render() {
     const {memo} = this.state;
     return(
@@ -44,7 +48,7 @@ class MemoDetailScreen extends React.Component {
           name="pencil"
           color="white"
           style={styles.editButton}
-          onPress={() => {this.props.navigation.navigate("MemoEdit", {memo: memo});}}
+          onPress={() => {this.props.navigation.navigate("MemoEdit", {...memo, returnMemo: this.returnMemo.bind(this)});}}
         />
       </View>
     );
