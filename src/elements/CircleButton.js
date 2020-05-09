@@ -11,6 +11,7 @@ const CustomIcon = createIconSet({
   pencil : "\uf303",
   plus   : "\uf067",
   check  : "\uf00c",
+  trash  : "\uf2ed",
 }, 'FontAwesome');
 
 

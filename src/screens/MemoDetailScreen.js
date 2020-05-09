@@ -1,5 +1,7 @@
 import React from "react";
-import { StyleSheet, View, Text} from "react-native";
+import { StyleSheet, View, Text, Button, Alert} from "react-native";
+
+import firebase from "firebase";
 
 import CircleButton from "../elements/CircleButton";
 
@@ -26,6 +28,31 @@ class MemoDetailScreen extends React.Component {
     this.setState( { memo });
   }
 
+  handlePress() {
+    const { currentUser } = firebase.auth();
+    const db = firebase.firestore();
+    db.collection(`users/${currentUser.uid}/memos`).doc(this.state.memo.key).delete()
+    .then(() => {
+      this.props.navigation.goBack();
+    });
+  }
+
+  buttonAlert() {
+    Alert.alert(
+      "メモの削除確認",
+      "メモはクラウドから完全に削除されます。本当に削除しますか？",
+      [
+        {
+          text: "Cancel",
+          onPress: () => {},
+          style: "cancel"
+        },
+        { text: "OK", onPress: this.handlePress.bind(this) }
+      ],
+      { cancelable: false }
+    );
+  }
+
   render() {
     const {memo} = this.state;
     return(
@@ -50,6 +77,12 @@ class MemoDetailScreen extends React.Component {
           style={styles.editButton}
           onPress={() => {this.props.navigation.navigate("MemoEdit", {...memo, returnMemo: this.returnMemo.bind(this)});}}
         />
+        <CircleButton 
+          name="trash"
+          color="white"
+          style={styles.deleteButton}
+          onPress={this.buttonAlert.bind(this)}
+          />
       </View>
     );
   }
@@ -91,7 +124,12 @@ const styles = StyleSheet.create({
 
   editButton: {
     top: 75,
+    right: 80,
   },
+  deleteButton: {
+    top:75,
+    right: 20,
+  }
 });
 
 export default MemoDetailScreen;
